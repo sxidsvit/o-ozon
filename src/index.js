@@ -105,7 +105,7 @@ function actionPage() {
     cards.forEach((card) => {
       card.setAttribute('discont-filter', 'yes')
       if (discountCheckbox.checked) {
-        if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no') { // отображаем только дисконтные карточки
+        if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
           card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
           card.setAttribute('discont-filter', 'no')
           console.log(card.getAttribute('discont-filter'));
