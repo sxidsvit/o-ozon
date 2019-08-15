@@ -107,14 +107,12 @@ function actionPage() {
       if (discountCheckbox.checked) {
         if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
           card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
-          card.setAttribute('discont-filter', 'no')
-          console.log(card.getAttribute('discont-filter'));
+          card.setAttribute('discont-filter', 'no')  // Устанавливаем значение атрибута
           // card.parentNode.remove() // альтернативный способ
         }
       } else { // отображаем все ранее скрытые не дисконтные карточки
         card.parentNode.style.display = 'flex' // обращаемся к родителю элемента card
-        card.setAttribute('discont-filter', 'no')
-        console.log(card.getAttribute('discont-filter'));
+        card.setAttribute('discont-filter', 'no') // Устанавливаем значение атрибута
         // document.querySelector('.goods').appendChild(card.parentNode) // альтернативный способ
       }
     })
@@ -125,23 +123,23 @@ function actionPage() {
   const min = document.getElementById('min')  // input для ввода минимального значения
   const max = document.getElementById('max')  // input для ввода максимального значения
 
-  function filterPrice() { // функция-фильтр (обработчик события change)
+  function filterPrice() { // функция-фильтр (обработчик события change!!!)
     cards.forEach((card) => {
-      card.setAttribute('price-filter', 'yes')
+      card.setAttribute('price-filter', 'yes') // Устанавливаем значение атрибута
       const cardPrice = card.querySelector('.card-price') // извлекаем из карточки её цену
       const price = parseFloat(cardPrice.textContent) // удаляем из карточки символ валюты
 
       if ((min.value && price < min.value) || (price > max.value && max.value) || card.getAttribute('discont-filter') == 'no') {  // диапозон фильтрации
         card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
-        card.setAttribute('price-filter', 'no')
+        card.setAttribute('price-filter', 'no') // Устанавливаем значение атрибута
       } else {
         card.parentNode.style.display = 'flex' // отображаем все карточки
       }
     })
   }
 
-  min.addEventListener('change', filterPrice) // задаём минимальную цену товара
-  max.addEventListener('change', filterPrice) // задаём максимальную цену товара
+  min.addEventListener('change', filterPrice) // задаём обработчик для минимальной цены товара
+  max.addEventListener('change', filterPrice) // задаём обработчик для максимальной цены товара
 
   // ========== поиск по заголовкам карточек (шапка сайта) ===============================
 
@@ -160,7 +158,6 @@ function actionPage() {
     })
   })
 } // end actionPage()
-
 
 // end filter for action -----------------------------------------
 
