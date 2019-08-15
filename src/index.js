@@ -103,13 +103,18 @@ function actionPage() {
 
   discountCheckbox.addEventListener('click', () => {
     cards.forEach((card) => {
+      card.setAttribute('discont-filter', 'yes')
       if (discountCheckbox.checked) {
-        if (!card.querySelector('.card-sale')) { // отображаем только дисконтные карточки
+        if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no') { // отображаем только дисконтные карточки
           card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
+          card.setAttribute('discont-filter', 'no')
+          console.log(card.getAttribute('discont-filter'));
           // card.parentNode.remove() // альтернативный способ
         }
       } else { // отображаем все ранее скрытые не дисконтные карточки
         card.parentNode.style.display = 'flex' // обращаемся к родителю элемента card
+        card.setAttribute('discont-filter', 'no')
+        console.log(card.getAttribute('discont-filter'));
         // document.querySelector('.goods').appendChild(card.parentNode) // альтернативный способ
       }
     })
@@ -122,11 +127,13 @@ function actionPage() {
 
   function filterPrice() { // функция-фильтр (обработчик события change)
     cards.forEach((card) => {
+      card.setAttribute('price-filter', 'yes')
       const cardPrice = card.querySelector('.card-price') // извлекаем из карточки её цену
       const price = parseFloat(cardPrice.textContent) // удаляем из карточки символ валюты
 
-      if ((min.value && price < min.value) || (price > max.value && max.value)) {  // диапозон фильтрации
+      if ((min.value && price < min.value) || (price > max.value && max.value) || card.getAttribute('discont-filter') == 'no') {  // диапозон фильтрации
         card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
+        card.setAttribute('price-filter', 'no')
       } else {
         card.parentNode.style.display = 'flex' // отображаем все карточки
       }
