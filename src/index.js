@@ -168,7 +168,7 @@ function actionPage() {
 function getData() {
   const goodsWrapper = document.querySelector('.goods')
   // https://jsonplaceholder.typicode.com/ 
-  return fetch('../db/db.json')
+  return fetch('/db/db.json')
     .then((response) => {
       if (response.ok) {
         return response.json(); // получаем данные для последующей обработки
