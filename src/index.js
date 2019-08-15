@@ -105,7 +105,7 @@ function actionPage() {
     cards.forEach((card) => {
       card.setAttribute('discont-filter', 'yes')
       if (discountCheckbox.checked) {
-        if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
+        if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no' || card.getAttribute('category-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
           card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
           card.setAttribute('discont-filter', 'no')  // Устанавливаем значение атрибута
           // card.parentNode.remove() // альтернативный способ
@@ -195,7 +195,7 @@ function renderCards(data) {   // рендерим данные полученн
     card.className = 'col-12 col-md-6 col-lg-4 col-xl-3' // задаем классы элементу
     card.innerHTML = `
       <div class="card" data-category = "${good.category}">
-        ${good.sale ? '<div class="card-sale">🔥Hot Sale🔥</div>' : ''}
+        ${good.sale ? '<div class="card-sale">🔥Hot Sale💖</div>' : ''}
 				<div class="card-img-wrapper">
 					<span class="card-img-top"
 						style="background-image: url('${good.img}')"></span>
@@ -222,6 +222,7 @@ function renderCatalog() {
   const categories = new Set() // коллекция для сохранения уникальных значений категорий  
 
   cards.forEach(card => { // получаем все категории товаров
+    card.setAttribute('category-filter', 'yes')
     categories.add(card.dataset.category) // получаем значение дата-атрибута data-category
   })
 
@@ -242,6 +243,7 @@ function renderCatalog() {
         if (card.dataset.category === event.target.textContent) {
           card.parentNode.style.display = 'flex'
         } else {
+          card.setAttribute('discont-filter', 'no')
           card.parentNode.style.display = 'none'
         }
       })
