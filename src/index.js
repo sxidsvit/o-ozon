@@ -127,13 +127,14 @@ function actionPage() {
 
   function filterPrice() { // функция-фильтр (обработчик события change!!!)
     cards.forEach((card) => {
+      card.parentNode.style.display = 'flex' // отображаем все карточки
       card.setAttribute('price-filter', 'yes') // Устанавливаем значение атрибута
       const cardPrice = card.querySelector('.card-price') // извлекаем из карточки её цену
       const price = parseFloat(cardPrice.textContent) // удаляем из карточки символ валюты
 
       if ((min.value && price < min.value) || (price > max.value && max.value) || card.getAttribute('discont-filter') === 'no' || card.getAttribute('category-filter') == 'no') {  // диапозон фильтрации
         card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
-        card.setAttribute('price-filter', 'no') // Устанавливаем значение атрибута
+        // card.setAttribute('price-filter', 'no') // Устанавливаем значение атрибута
       } else {
         card.parentNode.style.display = 'flex' // отображаем все карточки
       }
