@@ -45,7 +45,6 @@ function toggleCart() {
 // Add product to cart -----------------------------------
 
 function addCart() {
-
   const cards = document.querySelectorAll('.goods .card') // карточка товара
   const cartWrapper = document.querySelector('.cart-wrapper') // область содержимого карзины
   const cartEmpty = document.getElementById('cart-empty') // область для служебного сообщения карзины
@@ -70,7 +69,7 @@ function addCart() {
   function showData() {  // отображение контента корзины
 
     const cardsCart = cartWrapper.querySelectorAll('.card') // карточки товаров из карзины
-    const cardsPrice = cartWrapper.querySelectorAll('.card-price') // товары в карзине 
+    const cardsPrice = cartWrapper.querySelectorAll('.card-price') // товары в карзине
     const cardTotal = document.querySelector('.cart-total span') // отображение суммарной цены
     countGoods.textContent = cardsCart.length // количество карточек записываем в инфометр карзины
 
@@ -83,7 +82,7 @@ function addCart() {
     if (cardsCart.length !== 0) {
       cartEmpty.remove() // убираем область служебного сообщения карзины
     } else {
-      cartWrapper.appendChild(cartEmpty) // добавляем служебное сообщение 
+      cartWrapper.appendChild(cartEmpty) // добавляем служебное сообщение
     }
 
   }
@@ -95,20 +94,17 @@ function addCart() {
 // filter for actions (filtering & searche) ------------------
 
 function actionPage() {
-
   // ========= фильтр по акции (дисконту) ================
 
-  const cards = document.querySelectorAll('.goods .card')  // выбираем все карточки
+  const cards = document.querySelectorAll('.goods .card') // выбираем все карточки
   const discountCheckbox = document.getElementById('discount-checkbox') // выбираем дисконтные карточки (акция)
 
   discountCheckbox.addEventListener('click', () => {
     cards.forEach((card) => {
       card.setAttribute('discont-filter', 'yes')
       if (discountCheckbox.checked) {
-        if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no' || card.getAttribute('category-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
+        if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') === 'no' || card.getAttribute('category-filter') === 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
           card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
-          card.setAttribute('discont-filter', 'no')  // Устанавливаем значение атрибута
-          // card.setAttribute('category-filter', 'no')  // Устанавливаем значение атрибута
           // card.parentNode.remove() // альтернативный способ
         }
       }
@@ -116,8 +112,8 @@ function actionPage() {
         // console.log('discountCheckbox.checked: ', discountCheckbox.checked);
 
         card.parentNode.style.display = 'flex' // обращаемся к родителю элемента card
-        card.setAttribute('discont-filter', 'no')  // Устанавливаем значение атрибута
-        if (card.getAttribute('price-filter') == 'no' || card.getAttribute('category-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
+        card.setAttribute('discont-filter', 'no') // Устанавливаем значение атрибута
+        if (card.getAttribute('price-filter') === 'no' || card.getAttribute('category-filter') === 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
           card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
         }
       }
@@ -135,7 +131,7 @@ function actionPage() {
       const cardPrice = card.querySelector('.card-price') // извлекаем из карточки её цену
       const price = parseFloat(cardPrice.textContent) // удаляем из карточки символ валюты
 
-      if ((min.value && price < min.value) || (price > max.value && max.value) || card.getAttribute('discont-filter') == 'no' || card.getAttribute('category-filter') == 'no') {  // диапозон фильтрации
+      if ((min.value && price < min.value) || (price > max.value && max.value) || card.getAttribute('discont-filter') === 'no' || card.getAttribute('category-filter') == 'no') {  // диапозон фильтрации
         card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
         card.setAttribute('price-filter', 'no') // Устанавливаем значение атрибута
       } else {
@@ -153,10 +149,10 @@ function actionPage() {
   const searchInput = document.querySelector('.search-wrapper_input') // input для поиска по сайту
 
   searchBtn.addEventListener('click', () => {
-    const searchText = new RegExp(searchInput.value.trim(), 'i') // введенное в поле поиска значение преобразовываем в регулярное выражение и далее будем искать первое совпадение 
+    const searchText = new RegExp(searchInput.value.trim(), 'i') // введенное в поле поиска значение преобразовываем в регулярное выражение и далее будем искать первое совпадение
     cards.forEach((card) => {
       const cardTitle = card.querySelector('.card-title')
-      if (!searchText.test(cardTitle.textContent)) {  // есть ли регулярное выражение в заголовке карточки
+      if (!searchText.test(cardTitle.textContent)) { // есть ли регулярное выражение в заголовке карточки
         card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
       } else {
         card.parentNode.style.display = 'flex' // отображаем все карточки
@@ -184,12 +180,12 @@ function getData() {
       }
     })
     // .then((data) => data) // возвращаем полученные с сервера данные для их последующей обработки
-    .catch(err => {  // получаем сообщение об ошибке и выводи его внутри обертки карточек 
+    .catch(err => {  // получаем сообщение об ошибке и выводи его внутри обертки карточек
       console.warn(err)
       goodsWrapper.innerHTML = '<div class="mt-5 p-5 text-danger bg-light shadow lead text-center" >Что-то пошло не так<br> Возможно проблема с сервером ...</div>'
     })
 }
-// end get data from server 
+// end get data from server
 
 
 // Cards rendering -------------------------------------------------
@@ -223,12 +219,11 @@ function renderCards(data) {   // рендерим данные полученн
 function renderCatalog() {
   const cards = document.querySelectorAll('.goods .card') // карточки товаров
   const catalogBtn = document.querySelector('.catalog-button') // обертка списка категорий и кнопки "Каталог"
-  const catalogWrapper = document.querySelector('.catalog')  // обертка списка категорий каталога
+  const catalogWrapper = document.querySelector('.catalog') // обертка списка категорий каталога
   const catalogList = document.querySelector('.catalog-list') // тэг ul для вывода списка категорий каталога
-  const categories = new Set() // коллекция для сохранения уникальных значений категорий  
+  const categories = new Set() // коллекция для сохранения уникальных значений категорий
 
   cards.forEach(card => { // получаем все категории товаров
-    card.setAttribute('category-filter', 'no')
     categories.add(card.dataset.category) // получаем значение дата-атрибута data-category
   })
 
@@ -239,12 +234,12 @@ function renderCatalog() {
   })
 
   catalogBtn.addEventListener('click', (event) => {
-    if (catalogWrapper.style.display) {  // Отображение.скрытие списка категорий
+    if (catalogWrapper.style.display) { // Отображение/скрытие списка категорий
       catalogWrapper.style.display = ''
     } else {
       catalogWrapper.style.display = 'block'
     }
-    if (event.target.tagName == 'LI') {  // если кликнули по элементу списка категорий
+    if (event.target.tagName === 'LI') { // если кликнули по элементу списка категорий
       cards.forEach((card) => { // получаем карточки из выбранной категории
         if (card.dataset.category === event.target.textContent) {
           card.parentNode.style.display = 'flex'
