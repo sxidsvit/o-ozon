@@ -27,8 +27,8 @@ export default function actionPage() {
 
   // ========== фильтр по диапозону цен ============
 
-  const min = document.getElementById('min')  // input для ввода минимального значения
-  const max = document.getElementById('max')  // input для ввода максимального значения
+  const min = document.getElementById('min') // input для ввода минимального значения
+  const max = document.getElementById('max') // input для ввода максимального значения
 
   function filterPrice() { // функция-фильтр (обработчик события change!!!)
     cards.forEach((card) => {

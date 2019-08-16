@@ -1,3 +1,5 @@
+import filter from '../modules/filter'
+
 export default function renderCatalog() {
   const cards = document.querySelectorAll('.goods .card') // карточки товаров
   const catalogBtn = document.querySelector('.catalog-button') // обертка списка категорий и кнопки "Каталог"
@@ -42,6 +44,7 @@ export default function renderCatalog() {
         }
       })
       filterTitle.textContent = event.target.textContent
+      filter()
     }
   })
 
