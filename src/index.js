@@ -108,12 +108,18 @@ function actionPage() {
         if (!card.querySelector('.card-sale') || card.getAttribute('price-filter') == 'no' || card.getAttribute('category-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
           card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
           card.setAttribute('discont-filter', 'no')  // Устанавливаем значение атрибута
+          // card.setAttribute('category-filter', 'no')  // Устанавливаем значение атрибута
           // card.parentNode.remove() // альтернативный способ
         }
-      } else { // отображаем все ранее скрытые не дисконтные карточки
+      }
+      if (!discountCheckbox.checked) {
+        console.log('discountCheckbox.checked: ', discountCheckbox.checked);
+
         card.parentNode.style.display = 'flex' // обращаемся к родителю элемента card
-        card.setAttribute('discont-filter', 'no') // Устанавливаем значение атрибута
-        // document.querySelector('.goods').appendChild(card.parentNode) // альтернативный способ
+        card.setAttribute('discont-filter', 'no')  // Устанавливаем значение атрибута
+        if (card.getAttribute('price-filter') == 'no' || card.getAttribute('category-filter') == 'no') { // отображаем дисконтные карточки и отфильтрованные по цене
+          card.parentNode.style.display = 'none' // обращаемся к родителю элемента card
+        }
       }
     })
   })
@@ -129,7 +135,7 @@ function actionPage() {
       const cardPrice = card.querySelector('.card-price') // извлекаем из карточки её цену
       const price = parseFloat(cardPrice.textContent) // удаляем из карточки символ валюты
 
-      if ((min.value && price < min.value) || (price > max.value && max.value) || card.getAttribute('discont-filter') == 'no') {  // диапозон фильтрации
+      if ((min.value && price < min.value) || (price > max.value && max.value) || card.getAttribute('discont-filter') == 'no' || card.getAttribute('category-filter') == 'no') {  // диапозон фильтрации
         card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
         card.setAttribute('price-filter', 'no') // Устанавливаем значение атрибута
       } else {
@@ -222,7 +228,7 @@ function renderCatalog() {
   const categories = new Set() // коллекция для сохранения уникальных значений категорий  
 
   cards.forEach(card => { // получаем все категории товаров
-    card.setAttribute('category-filter', 'yes')
+    card.setAttribute('category-filter', 'no')
     categories.add(card.dataset.category) // получаем значение дата-атрибута data-category
   })
 
@@ -242,9 +248,10 @@ function renderCatalog() {
       cards.forEach((card) => { // получаем карточки из выбранной категории
         if (card.dataset.category === event.target.textContent) {
           card.parentNode.style.display = 'flex'
+          card.setAttribute('category-filter', 'yes')
         } else {
-          card.setAttribute('discont-filter', 'no')
           card.parentNode.style.display = 'none'
+          card.setAttribute('category-filter', 'no')
         }
       })
     }
