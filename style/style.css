@@ -610,8 +610,12 @@ nav .search-btn button::before {
   padding: 0.8em 0.0em;
 }
 
+/* мои правки стилей */
+
 .catalog-list li.active {
   color: #005bff;
-  /* color: #9f3584;
-  background-color: #005bff */
+}
+
+.card {
+  width: 100%;
 }
