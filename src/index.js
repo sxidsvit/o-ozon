@@ -113,7 +113,7 @@ function actionPage() {
         }
       }
       if (!discountCheckbox.checked) {
-        console.log('discountCheckbox.checked: ', discountCheckbox.checked);
+        // console.log('discountCheckbox.checked: ', discountCheckbox.checked);
 
         card.parentNode.style.display = 'flex' // обращаемся к родителю элемента card
         card.setAttribute('discont-filter', 'no')  // Устанавливаем значение атрибута
