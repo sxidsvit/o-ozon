@@ -1,0 +1,37 @@
+export default function renderCatalog() {
+  const cards = document.querySelectorAll('.goods .card') // карточки товаров
+  const catalogBtn = document.querySelector('.catalog-button') // обертка списка категорий и кнопки "Каталог"
+  const catalogWrapper = document.querySelector('.catalog') // обертка списка категорий каталога
+  const catalogList = document.querySelector('.catalog-list') // тэг ul для вывода списка категорий каталога
+  const categories = new Set() // коллекция для сохранения уникальных значений категорий
+
+  cards.forEach(card => { // получаем все категории товаров
+    categories.add(card.dataset.category) // получаем значение дата-атрибута data-category
+  })
+
+  categories.forEach((item) => { // формируем список категорий
+    const li = document.createElement('li')
+    li.textContent = item
+    catalogList.appendChild(li)
+  })
+
+  catalogBtn.addEventListener('click', (event) => {
+    if (catalogWrapper.style.display) { // Отображение/скрытие списка категорий
+      catalogWrapper.style.display = ''
+    } else {
+      catalogWrapper.style.display = 'block'
+    }
+    if (event.target.tagName === 'LI') { // если кликнули по элементу списка категорий
+      cards.forEach((card) => { // получаем карточки из выбранной категории
+        if (card.dataset.category === event.target.textContent) {
+          card.parentNode.style.display = 'flex'
+          card.setAttribute('category-filter', 'yes')
+        } else {
+          card.parentNode.style.display = 'none'
+          card.setAttribute('category-filter', 'no')
+        }
+      })
+    }
+  })
+
+}
