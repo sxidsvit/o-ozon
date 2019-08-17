@@ -22,11 +22,9 @@ export default function filter() {
     } else if (discountCheckbox.checked && !discount) {
       // console.log('discont: ', price)
       card.parentNode.style.display = 'none'
-    } else if (activLi) {
-      if (card.dataset.category !== activLi.textContent) {
-        // console.log('category: ', price)
-        card.parentNode.style.display = 'none'
-      }
+    } else if (activLi && (card.dataset.category !== activLi.textContent)) {
+      // console.log('category: ', price)
+      card.parentNode.style.display = 'none'
     } else if (!searchText.test(cardTitle.textContent)) { // есть ли регулярное выражение в заголовке карточки
       // console.log('text: ', price)
       card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
