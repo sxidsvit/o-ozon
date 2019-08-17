@@ -1,10 +1,10 @@
 import filter from '../modules/filter'
-import filterTitle from '../modules/fiterTitle'
+// import filterTitle from '../modules/fiterTitle'
 
 export default function actionPage() {
   // ========= фильтр по акции (дисконту) ================
 
-  const cards = document.querySelectorAll('.goods .card') // выбираем все карточки
+  // const cards = document.querySelectorAll('.goods .card') // выбираем все карточки
   const discountCheckbox = document.getElementById('discount-checkbox') // выбираем дисконтные карточки (акция)
 
 
