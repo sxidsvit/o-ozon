@@ -22,5 +22,5 @@ export default function actionPage() {
 
   const searchBtn = document.querySelector('.search-btn') // кнопка поиска в шапке сайта
 
-  searchBtn.addEventListener('click', filterTitle)
+  searchBtn.addEventListener('click', filter)
 }
