@@ -1,5 +1,6 @@
 export default function filterTitle() {
   // поиск по заголовкам карточек текста введенного в строке поиска
+  const cards = document.querySelectorAll('.goods .card') // карточка товара
   const searchInput = document.querySelector('.search-wrapper_input') // input для поиска по сайту
   const searchText = new RegExp(searchInput.value.trim(), 'i') // введенное в поле поиска значение преобразовываем в регулярное выражение и далее будем искать первое совпадение
   cards.forEach((card) => {
