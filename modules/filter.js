@@ -9,6 +9,7 @@ export default function filter() {
     const cardPrice = card.querySelector('.card-price')
     const price = parseFloat(cardPrice.textContent)
     const discount = card.querySelector('.card-sale')
+    card.parentNode.style.display = 'flex'
 
     if ((min.value && price < min.value) || (price > max.value && max.value)) {
       card.parentNode.style.display = 'none'
@@ -18,8 +19,6 @@ export default function filter() {
       if (card.dataset.category !== activLi.textContent) {
         card.parentNode.style.display = 'none'
       }
-    } else {
-      card.parentNode.style.display = 'flex'
     }
   })
 }
