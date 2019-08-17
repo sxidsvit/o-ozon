@@ -30,10 +30,8 @@ export default function renderCatalog() {
       cards.forEach((card) => { // получаем карточки из выбранной категории
         if (card.dataset.category === event.target.textContent) {
           card.parentNode.style.display = 'flex'
-          card.setAttribute('category-filter', 'yes')
         } else {
           card.parentNode.style.display = 'none'
-          card.setAttribute('category-filter', 'no')
         }
       })
       allLi.forEach((elem) => {
@@ -47,5 +45,4 @@ export default function renderCatalog() {
       filter()
     }
   })
-
 }
