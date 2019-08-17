@@ -1,4 +1,5 @@
 import filter from '../modules/filter'
+import filterTitle from '../modules/fiterTitle'
 
 export default function actionPage() {
   // ========= фильтр по акции (дисконту) ================
@@ -17,20 +18,9 @@ export default function actionPage() {
   min.addEventListener('change', filter) // задаём обработчик для минимальной цены товара
   max.addEventListener('change', filter) // задаём обработчик для максимальной цены товара
 
-  // ========== поиск по заголовкам карточек (шапка сайта) ===============================
+  // ========== поиск по заголовкам карточек (шапка сайта) =
 
   const searchBtn = document.querySelector('.search-btn') // кнопка поиска в шапке сайта
-  const searchInput = document.querySelector('.search-wrapper_input') // input для поиска по сайту
 
-  searchBtn.addEventListener('click', () => {
-    const searchText = new RegExp(searchInput.value.trim(), 'i') // введенное в поле поиска значение преобразовываем в регулярное выражение и далее будем искать первое совпадение
-    cards.forEach((card) => {
-      const cardTitle = card.querySelector('.card-title')
-      if (!searchText.test(cardTitle.textContent)) { // есть ли регулярное выражение в заголовке карточки
-        card.parentNode.style.display = 'none' // скрываем карточки не попавшие в диапозон поиска
-      } else {
-        card.parentNode.style.display = 'flex' // отображаем все карточки
-      }
-    })
-  })
+  searchBtn.addEventListener('click', filterTitle)
 }

@@ -22,7 +22,3 @@ export default function filter() {
     }
   })
 }
-
-// discountCheckbox.addEventListener('click', filter)
-// min.addEventListener('change', filter)
-// max.addEventListener('change', filter)
