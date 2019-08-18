@@ -20,7 +20,8 @@ export default function actionPage() {
 
   // ========== поиск по заголовкам карточек (шапка сайта) =
 
-  const searchBtn = document.querySelector('.search-btn') // кнопка поиска в шапке сайта
+  // const searchBtn = document.querySelector('.search-btn') // кнопка поиска в шапке сайта
+  const search = document.querySelector('.search') // область поиска в шапке сайта
 
-  searchBtn.addEventListener('click', filter)
+  search.addEventListener('click', filter)
 }

@@ -1,4 +1,5 @@
 export default function filter() {
+  console.log('event.target', event.target)
   const cards = document.querySelectorAll('.goods .card') // карточка товара
   const discountCheckbox = document.getElementById('discount-checkbox')
   const min = document.getElementById('min')
